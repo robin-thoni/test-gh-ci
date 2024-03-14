@@ -1,0 +1,11 @@
+on:
+  push:
+  pull_request:
+
+jobs:
+  log:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Log
+        run: |
+          env | grep -v -i token
