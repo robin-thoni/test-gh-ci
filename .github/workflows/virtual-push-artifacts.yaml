@@ -35,3 +35,11 @@ jobs:
     steps:
       - name: Push artifacts
         run: echo Pushing artifacts
+
+  virtual-push-other-artifacts:
+    needs: virtual-push-artifacts
+    runs-on: ubuntu-latest
+    needs: log
+    steps:
+      - name: Push other artifacts
+        run: echo Pushing other artifacts
