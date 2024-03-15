@@ -14,3 +14,5 @@ jobs:
       - name: Log
         run: |
           env | grep -v -i token
+          echo "OS (input): ${{ inputs.os }}"
+          echo "OS (matrix): ${{ matrix.os }}"
