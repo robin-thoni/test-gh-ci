@@ -7,6 +7,10 @@ on:
         required: true
         type: string
 
+env:
+  FOO: bar
+  FOO_EXT: "${FOO}-ext"
+
 jobs:
   log:
     runs-on: ubuntu-latest
