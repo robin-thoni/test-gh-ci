@@ -25,3 +25,5 @@ jobs:
           - windows-latest
           - macos-latest
     uses: ./.github/workflows/reusable-workflow-job.yaml
+    with:
+      os: "${{ matrix.os }}"
