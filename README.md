@@ -2,4 +2,4 @@
 
 test
 awesome feature
-second feature
+fix second feature

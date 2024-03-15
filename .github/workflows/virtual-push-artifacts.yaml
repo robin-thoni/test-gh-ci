@@ -6,8 +6,19 @@
 
 on:
   push:
-  pull_request:
+    paths:
+      - '**'
+      - '!.gitignore'
+      - '!.devcontainer/**'
+      - '!.github/workflows/**'
+      - .github/workflows/log.yaml
   workflow_dispatch:
+    inputs:
+      ref:
+        description: 'Push artifacts'
+        required: true
+        type: boolean
+        default: False
 
 jobs:
   log:
