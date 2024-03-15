@@ -31,7 +31,9 @@ jobs:
   meta-should-push-artifacts:
     if: (github.event_name == 'workflow_dispatch' && github.event.inputs.push == 'true') || (github.event_name == 'push' && (startsWith(github.ref, 'refs/tags/v') || startsWith(github.ref, 'refs/heads/issues/') || startsWith(github.ref, 'refs/heads/features/')))
     runs-on: ubuntu-latest
-    steps: []
+    steps:
+      - name: noop
+        run: ':'
 
   virtual-push-artifacts:
     runs-on: ubuntu-latest
