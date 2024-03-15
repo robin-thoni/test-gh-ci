@@ -3,7 +3,7 @@
 # - It's a push to:
 #   - issues/*
 #   - features/*
-
+name: Virtual Push Artifacts
 on:
   push:
     paths:
