@@ -6,7 +6,12 @@
 
 on:
   push:
-  pull_request:
+    paths:
+      - '**'
+      - '!.gitignore'
+      - '!.devcontainer/**'
+      - '!.github/workflows/**'
+      - .github/workflows/log.yaml
   workflow_dispatch:
 
 jobs:
