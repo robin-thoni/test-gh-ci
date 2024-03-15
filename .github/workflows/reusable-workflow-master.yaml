@@ -16,6 +16,9 @@ on:
         type: boolean
         default: false
 
+env:
+  WORKFLOW_MASTER_ENV_TEST: foo
+
 jobs:
   log:
     strategy:
