@@ -6,7 +6,8 @@ on:
       - '!.gitignore'
       - '!.devcontainer/**'
       - '!.github/workflows/**'
-      - .github/workflows/virtual-push-artifacts.yaml
+      - .github/workflows/reusable-workflow-master.yaml
+      - .github/workflows/reusable-workflow-job.yaml
   workflow_dispatch:
     inputs:
       push:
