@@ -32,7 +32,7 @@ jobs:
           env | grep -v -i token
 
   virtual-push-artifacts:
-    if: (github.event_name == 'workflow_dispatch' && github.event.inputs.push == 'true') || (github.event_name == 'push' && (startsWith(github.ref, 'refs/tags/v') || startsWith(github.ref, 'refs/heads/issues/') || startsWith(github.ref, 'refs/heads/features/')))
+    if: (env.PUSH_ARTIFACTS == 'true')
     runs-on: ubuntu-latest
     needs: log
     steps:
