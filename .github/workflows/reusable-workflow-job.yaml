@@ -9,7 +9,7 @@ on:
 
 env:
   FOO: bar
-  FOO_EXT: "${FOO}-ext"
+  FOO_EXT: "${{ env.FOO }}-ext"
 
 jobs:
   log:
