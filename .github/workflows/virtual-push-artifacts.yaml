@@ -6,11 +6,8 @@
 
 on:
   push:
-    branches:
-      - 'issues/*'
-      - 'features/*'
-    tags:
-      - 'v*'
+  pull_request:
+  workflow_dispatch:
 
 jobs:
   log:
