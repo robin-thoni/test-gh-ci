@@ -1,0 +1,11 @@
+name: Reusable Workflow Job
+on:
+  workflow_call:
+
+jobs:
+  log:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Log
+        run: |
+          env | grep -v -i token

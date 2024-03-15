@@ -1,0 +1,32 @@
+name: Reusable Workflow Master
+on:
+  push:
+    paths:
+      - '**'
+      - '!.gitignore'
+      - '!.devcontainer/**'
+      - '!.github/workflows/**'
+      - .github/workflows/virtual-push-artifacts.yaml
+  workflow_dispatch:
+    inputs:
+      push:
+        description: 'Push artifacts'
+        required: true
+        type: boolean
+        default: false
+
+jobs:
+  log:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        os:
+          - ubuntu-latest
+          - windows-latest
+          - macos-latest
+    steps:
+      - name: Log
+        run: |
+          env | grep -v -i token
+      - name: Job
+        uses: ./.github/workflows/reusable-workflow-job.yaml
