@@ -20,6 +20,9 @@ on:
         type: boolean
         default: 'false'
 
+env:
+  PUSH_ARTIFACTS: (github.event_name == 'workflow_dispatch' && github.event.inputs.push == 'true') || (github.event_name == 'push' && (startsWith(github.ref, 'refs/tags/v') || startsWith(github.ref, 'refs/heads/issues/') || startsWith(github.ref, 'refs/heads/features/')))
+
 jobs:
   log:
     runs-on: ubuntu-latest
