@@ -11,7 +11,7 @@ on:
       - '!.gitignore'
       - '!.devcontainer/**'
       - '!.github/workflows/**'
-      - .github/workflows/log.yaml
+      - .github/workflows/virtual-push-artifacts.yaml
   workflow_dispatch:
     inputs:
       push:
