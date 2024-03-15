@@ -8,7 +8,7 @@ on:
         type: string
 
 env:
-  FOO: bar
+  FOO: "${{ github.event.inputs.os }}-foo"
   FOO_EXT: "${{ env.FOO }}-ext"
 
 jobs:
