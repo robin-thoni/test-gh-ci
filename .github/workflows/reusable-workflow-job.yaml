@@ -8,8 +8,8 @@ on:
         type: string
 
 env:
-  FOO: "${{ github.event.inputs.os }}-foo"
-  FOO_EXT: "${{ github.event.inputs.os }}-foo-ext"
+  FOO: "${{ inputs.os }}-foo"
+  FOO_EXT: "${{ inputs.os }}-foo-ext"
 
 jobs:
   log:
