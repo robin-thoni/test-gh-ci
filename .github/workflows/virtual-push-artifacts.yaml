@@ -20,9 +20,6 @@ on:
         type: boolean
         default: 'false'
 
-env:
-  PUSH_ARTIFACTS: "${{ (github.event_name == 'workflow_dispatch' && github.event.inputs.push == 'true') || (github.event_name == 'push' && (startsWith(github.ref, 'refs/tags/v') || startsWith(github.ref, 'refs/heads/issues/') || startsWith(github.ref, 'refs/heads/features/'))) }}"
-
 jobs:
   log:
     runs-on: ubuntu-latest
@@ -31,10 +28,16 @@ jobs:
         run: |
           env | grep -v -i token
 
-  virtual-push-artifacts:
-    if: (env.PUSH_ARTIFACTS == 'true')
+  meta-should-push-artifacts:
+    if: (github.event_name == 'workflow_dispatch' && github.event.inputs.push == 'true') || (github.event_name == 'push' && (startsWith(github.ref, 'refs/tags/v') || startsWith(github.ref, 'refs/heads/issues/') || startsWith(github.ref, 'refs/heads/features/')))
     runs-on: ubuntu-latest
-    needs: log
+    steps: []
+
+  virtual-push-artifacts:
+    runs-on: ubuntu-latest
+    needs:
+      - log
+      - meta-should-push-artifacts
     steps:
       - name: Push artifacts
         run: echo Pushing artifacts
