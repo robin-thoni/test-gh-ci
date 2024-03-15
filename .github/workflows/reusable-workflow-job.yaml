@@ -9,7 +9,7 @@ on:
 
 env:
   FOO: "${{ github.event.inputs.os }}-foo"
-  FOO_EXT: "${{ env.FOO }}-ext"
+  FOO_EXT: "${{ github.event.inputs.os }}-foo-ext"
 
 jobs:
   log:
