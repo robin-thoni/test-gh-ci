@@ -1,0 +1,22 @@
+name: Reusable Workflow Job
+on:
+  workflow_call:
+    inputs:
+      os:
+        description: 'The os to build for'
+        required: true
+        type: string
+
+env:
+  FOO: "${{ inputs.os }}-foo"
+  FOO_EXT: "${{ inputs.os }}-foo-ext"
+
+jobs:
+  log:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Log
+        run: |
+          env | grep -v -i token
+          echo "OS (input): ${{ inputs.os }}"
+          echo "OS (matrix): ${{ matrix.os }}"

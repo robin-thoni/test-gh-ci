@@ -1,0 +1,32 @@
+name: Reusable Workflow Master
+on:
+  push:
+    paths:
+      - '**'
+      - '!.gitignore'
+      - '!.devcontainer/**'
+      - '!.github/workflows/**'
+      - .github/workflows/reusable-workflow-master.yaml
+      - .github/workflows/reusable-workflow-job.yaml
+  workflow_dispatch:
+    inputs:
+      push:
+        description: 'Push artifacts'
+        required: true
+        type: boolean
+        default: false
+
+env:
+  WORKFLOW_MASTER_ENV_TEST: foo
+
+jobs:
+  log:
+    strategy:
+      matrix:
+        os:
+          - ubuntu-latest
+          - windows-latest
+          - macos-latest
+    uses: ./.github/workflows/reusable-workflow-job.yaml
+    with:
+      os: "${{ matrix.os }}"
