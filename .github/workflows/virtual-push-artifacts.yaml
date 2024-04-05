@@ -19,6 +19,14 @@ on:
         required: true
         type: boolean
         default: 'false'
+  workflow_call:
+    outputs:
+      run-id:
+        description: 'The ID of the workflow run that was triggered'
+        value: ${{ github.run_id }}
+      output-name:
+        description: 'The name of the uploaded artifact'
+        value: ${{ github.jobs.virtual-push-artifacts.outputs.output-name }}
 
 jobs:
   log:
@@ -29,7 +37,7 @@ jobs:
           env | grep -v -i token
 
   meta-should-push-artifacts:
-    if: (github.event_name == 'workflow_dispatch' && github.event.inputs.push == 'true') || (github.event_name == 'push' && (startsWith(github.ref, 'refs/tags/v') || startsWith(github.ref, 'refs/heads/issues/') || startsWith(github.ref, 'refs/heads/features/')))
+    if: (github.event_name == 'workflow_call') || (github.event_name == 'workflow_dispatch' && github.event.inputs.push == 'true') || (github.event_name == 'push' && (startsWith(github.ref, 'refs/tags/v') || startsWith(github.ref, 'refs/heads/issues/') || startsWith(github.ref, 'refs/heads/features/')))
     runs-on: ubuntu-latest
     steps:
       - name: noop
@@ -37,12 +45,20 @@ jobs:
 
   virtual-push-artifacts:
     runs-on: ubuntu-latest
+    outputs:
+      output-name: output.txt
     needs:
       - log
       - meta-should-push-artifacts
     steps:
-      - name: Push artifacts
-        run: echo Pushing artifacts
+      - name: Generate artifacts
+        run: echo test > output.txt
+      - name: Upload artifacts
+        id: upload-artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: output.txt
+          path: output.txt
 
   virtual-push-other-artifacts:
     runs-on: ubuntu-latest
