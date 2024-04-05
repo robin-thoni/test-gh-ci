@@ -33,3 +33,4 @@ jobs:
           artifacts: README.md
           generateReleaseNotes: true
           makeLatest: ${{ github.event.inputs.makeLatest }}
+          tag: ${{ github.event.inputs.version }}
