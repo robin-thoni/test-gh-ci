@@ -42,7 +42,7 @@ jobs:
           env | grep -v -i token
 
   meta-should-push-artifacts:
-    if: (github.event_name == 'workflow_dispatch' && github.event.inputs.push == 'true') || (github.event_name == 'push' && (startsWith(github.ref, 'refs/tags/v') || startsWith(github.ref, 'refs/heads/issues/') || startsWith(github.ref, 'refs/heads/features/')))
+    if: (github.event_name == 'workflow_dispatch' && inputs.push == 'true') || (github.event_name == 'push' && (startsWith(github.ref, 'refs/tags/v') || startsWith(github.ref, 'refs/heads/issues/') || startsWith(github.ref, 'refs/heads/features/')))
     runs-on: ubuntu-latest
     steps:
       - name: noop
