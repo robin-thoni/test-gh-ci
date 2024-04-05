@@ -19,6 +19,10 @@ on:
         required: true
         type: boolean
         default: 'false'
+    outputs:
+      output-name:
+        description: 'The name of the uploaded artifact'
+        value: output.txt
   workflow_call:
     inputs:
       push:
@@ -26,9 +30,6 @@ on:
         required: true
         type: boolean
     outputs:
-      run-id:
-        description: 'The ID of the workflow run that was triggered'
-        value: ${{ github.run_id }}
       output-name:
         description: 'The name of the uploaded artifact'
         value: output.txt

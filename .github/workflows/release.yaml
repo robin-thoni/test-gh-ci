@@ -35,7 +35,6 @@ jobs:
         with:
           name: ${{ needs.upload-artifacts.outputs.artifact-name }}
           github-token: ${{ secrets.GITHUB_TOKEN }}
-          run-id: ${{ needs.upload-artifacts.outputs.run-id }}
       - uses: ncipollo/release-action@v1
         with:
           artifacts: README.md,${{ needs.upload-artifacts.outputs.artifact-name }}
