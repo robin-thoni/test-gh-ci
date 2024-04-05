@@ -56,7 +56,7 @@ jobs:
       - name: Generate artifacts
         id: generate-artifacts
         run: |
-          artifact_name="output-$(date +"%Y-%m-%dT%H:%M:%S%z").txt"
+          artifact_name="output-$(date "+%Y-%m-%dT%H-%M-%S").txt"
           echo test > "${artifact_name}"
           echo "artifact-name=${artifact_name}" >> $GITHUB_OUTPUT
       - name: Upload artifacts
