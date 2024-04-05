@@ -17,6 +17,8 @@ on:
 jobs:
   upload-artifacts:
     uses: ./.github/workflows/virtual-push-artifacts.yaml
+    with:
+      push: true
   release:
     runs-on: ubuntu-latest
     needs: upload-artifacts
@@ -36,7 +38,7 @@ jobs:
           run-id: ${{ needs.upload-artifacts.outputs.run-id }}
       - uses: ncipollo/release-action@v1
         with:
-          artifacts: README.md
+          artifacts: README.md,${{ needs.upload-artifacts.outputs.artifact-name }}
           generateReleaseNotes: true
           makeLatest: ${{ github.event.inputs.makeLatest }}
           tag: ${{ github.event.inputs.version }}
