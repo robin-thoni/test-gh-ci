@@ -28,7 +28,7 @@ on:
     outputs:
       artifact-name:
         description: 'The name of the uploaded artifact'
-        value: output.txt
+        value: ${{ steps.upload-artifacts.outputs.artifact-name }}
 
 jobs:
   log:
@@ -48,19 +48,23 @@ jobs:
   virtual-push-artifacts:
     runs-on: ubuntu-latest
     outputs:
-      output-name: output.txt
+      artifact-name: ${{ steps.generate-artifacts.outputs.artifact-name }}
     needs:
       - log
       - meta-should-push-artifacts
     steps:
       - name: Generate artifacts
-        run: echo test > output.txt
+        id: generate-artifacts
+        run: |
+          artifact_name="output-$(date +"%Y-%m-%dT%H:%M:%S%z").txt"
+          echo test > "${artifact_name}"
+          echo "artifact-name=${artifact_name}" >> $GITHUB_OUTPUT
       - name: Upload artifacts
         id: upload-artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: output.txt
-          path: output.txt
+          name: ${{ steps.generate-artifacts.outputs.artifact-name }}
+          path: ${{ steps.generate-artifacts.outputs.artifact-name }}
 
   virtual-push-other-artifacts:
     runs-on: ubuntu-latest
