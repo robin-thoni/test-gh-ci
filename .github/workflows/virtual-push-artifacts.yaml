@@ -40,6 +40,8 @@ jobs:
       - name: Log
         run: |
           env | grep -v -i token
+          echo ========================================
+          echo "inputs.push=${{ inputs.push }}"
 
   meta-should-push-artifacts:
     if: (github.event_name == 'workflow_dispatch' && inputs.push == 'true') || (github.event_name == 'push' && (startsWith(github.ref, 'refs/tags/v') || startsWith(github.ref, 'refs/heads/issues/') || startsWith(github.ref, 'refs/heads/features/')))
