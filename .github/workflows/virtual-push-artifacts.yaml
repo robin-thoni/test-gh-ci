@@ -25,7 +25,6 @@ on:
         description: 'Push artifacts'
         required: true
         type: boolean
-        default: 'false'
     outputs:
       run-id:
         description: 'The ID of the workflow run that was triggered'
